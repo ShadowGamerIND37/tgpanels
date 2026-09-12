@@ -42,7 +42,7 @@ panel_menu() {
         echo -e "  ${GOLD}  AVAILABLE DEPLOYMENTS${NC}"
         echo -e "  ${GRAY}┌──────────────────────────┬──────────────────────────┐${NC}"
         echo -e "  ${GRAY}│${NC} ${PURPLE}[1]${NC} Ptero                ${GRAY}│${NC} ${PURPLE}[7]${NC}  Convoy              ${GRAY}│${NC}"
-        echo -e "  ${GRAY}│${NC} ${PURPLE}[2]${NC} Jexactyl             ${GRAY}│${NC} ${PURPLE}[8]${NC}  FeatherPanel        ${GRAY}│${NC}"
+        echo -e "  ${GRAY}│${NC} ${PURPLE}[2]${NC} NovaStudio           ${GRAY}│${NC} ${PURPLE}[8]${NC}  FeatherPanel        ${GRAY}│${NC}"
         echo -e "  ${GRAY}│${NC} ${PURPLE}[3]${NC} JexPanel             ${GRAY}│${NC} ${PURPLE}[9]${NC}  Mythicaldash        ${GRAY}│${NC}"
         echo -e "  ${GRAY}│${NC} ${PURPLE}[4]${NC} Reviactyl            ${GRAY}│${NC} ${PURPLE}[10]${NC} Mythicaldashv3      ${GRAY}│${NC}"
         echo -e "  ${GRAY}│${NC} ${PURPLE}[5]${NC} CtrlPanel            ${GRAY}│${NC} ${PURPLE}[11]${NC} VPS Panel           ${GRAY}│${NC}"
@@ -57,7 +57,7 @@ panel_menu() {
                 bash <(curl -s https://raw.githubusercontent.com/nobita329/Nobita-Cloud/refs/heads/main/panel/pterodactyl/run.sh) 
                 pause ;;
             2)  echo -e "  ${CYAN}➜ Executing [] Routine...${NC}"
-                bash <(curl -s ) 
+                bash <(curl -s https://raw.githubusercontent.com/nobita329/NobitaHost/refs/heads/main/panel/NovaStudio/run.sh) 
                 pause ;;
             3)  echo -e "  ${CYAN}➜ Executing [] Routine...${NC}"
                 bash <(curl -s )
