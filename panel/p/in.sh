@@ -94,46 +94,6 @@ for r in data:
 " 2>/dev/null || return 1
 }
 
-# --- VERSION SELECTOR (10s timeout) ---
-select_version() {
-    local repo=$1
-    local var_name=$2
-    local default="latest"
-    echo -e "\n  ${PURPLE}::${NC} ${WHITE}Available Panel Versions${NC}"
-    local tags=() disp=() i=0
-    while IFS= read -r tag; do
-        [[ -z "$tag" ]] && continue
-        tags+=("$tag")
-        i=$((i+1))
-        disp+=("  ${GRAY}$i.${NC} ${WHITE}$tag${NC}")
-    done < <(fetch_github_versions "$repo" 2>/dev/null) || true
-
-    if [[ ${#tags[@]} -eq 0 ]]; then
-        echo -e "  ${YELLOW}No versions found. Using latest.${NC}"
-        eval "$var_name=\"$default\""
-        return
-    fi
-
-    printf '%b\n' "${disp[@]}"
-    local max=${#tags[@]}
-    echo -ne "\n  ${PURPLE}•${NC} ${WHITE}Select version [1-$max]${NC} ${GRAY}[1 = latest]${NC}\n  ${GRAY}╰─>${NC} "
-    if ! read -t 10 choice; then
-        echo -e "\n  ${GOLD}⌛ Timeout — using latest: ${WHITE}${tags[0]}${NC}"
-        eval "$var_name=\"${tags[0]}\""
-        return
-    fi
-    if [[ -z "$choice" || "$choice" == "1" ]]; then
-        echo -e "  ${GREEN}→ ${WHITE}${tags[0]}${NC}"
-        eval "$var_name=\"${tags[0]}\""
-    elif [[ "$choice" =~ ^[0-9]+$ ]] && [[ $choice -ge 1 ]] && [[ $choice -le $max ]]; then
-        local idx=$((choice - 1))
-        echo -e "  ${GREEN}→ ${WHITE}${tags[$idx]}${NC}"
-        eval "$var_name=\"${tags[$idx]}\""
-    else
-        echo -e "  ${GREEN}→ ${WHITE}${tags[0]}${NC} (invalid input)"
-        eval "$var_name=\"${tags[0]}\""
-    fi
-}
 
 # --- START ---
 show_banner
