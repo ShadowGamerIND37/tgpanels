@@ -203,20 +203,17 @@ apt install -y php${PHP_VERSION} php${PHP_VERSION}-{cli,fpm,common,mysql,mbstrin
 
 # --- Install Composer ---
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
+curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+apt -y install nodejs
 # --- Download Pterodactyl Panel ---
-mkdir -p /var/www/pterodactyl
-cd /var/www/pterodactyl
-if [[ "$version_PANEL" == "latest" ]]; then
-    step "Downloading latest panel release..."
-    curl -Lso panel.tar.gz https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz
-else
-    step "Downloading panel version $version_PANEL..."
-    curl -Lso panel.tar.gz "https://github.com/pterodactyl/panel/releases/download/${version_PANEL}/panel.tar.gz"
-fi
-tar -xzf panel.tar.gz
+curl -Lo panel.zip https://github.com/pterodactyl/panel/archive/refs/heads/2.0-develop.zip
+unzip -q panel.zip
+cp -a panel-2.0-develop/. .
+rm -rf panel-2.0-develop panel.zip
 chmod -R 755 storage/* bootstrap/cache/
 
+npm ci
+npm run build:production
 # --- MariaDB Setup ---
 DB_NAME=panel
 DB_USER=pterodactyl
