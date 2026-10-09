@@ -206,6 +206,8 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 apt -y install nodejs
 # --- Download Pterodactyl Panel ---
+mkdir -p /var/www/pterodactyl
+cd /var/www/pterodactyl
 curl -Lo panel.zip https://github.com/pterodactyl/panel/archive/refs/heads/2.0-develop.zip
 unzip -q panel.zip
 cp -a panel-2.0-develop/. .
